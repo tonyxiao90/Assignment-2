@@ -1,38 +1,35 @@
-  
 def encrypt_text(shift1, shift2):
-
-    with open ("raw_text.txt", "r") as infile:
+    with open("raw_text.txt", "r") as infile:
         text = infile.read()
 
-    encrypt_text = ""
+    encrypted = ""
 
-    for char in text: 
-        if char.islower():  #Lowercase Letters
-            pos = ord(char) - ord('a')
-            if pos <= 12: # a-m 
+    for ch in text:
+        # Lowercase letters
+        if ch.islower():
+            if 'a' <= ch <= 'm':
                 shift = shift1 * shift2
-                new_pos = (pos + shift) % 26
-            else:
+                enc = chr((ord(ch) - ord('a') + shift) % 26 + ord('a'))
+                encrypted += "L1" + enc   # tag: lowercase, first half
+            else:  # n-z
                 shift = shift1 + shift2
-                new_pos = (pos - shift) % 26
+                enc = chr((ord(ch) - ord('a') - shift) % 26 + ord('a'))
+                encrypted += "L2" + enc   # tag: lowercase, second half
 
-            encrypt_text += chr(new_pos + ord('a'))
-
-        elif char.isupper():
-            pos = ord(char) - ord('A')
-
-            if pos <= 12: 
+        # Uppercase letters
+        elif ch.isupper():
+            if 'A' <= ch <= 'M':
                 shift = shift1
-                new_pos = (pos - shift) % 26
-            else:
+                enc = chr((ord(ch) - ord('A') - shift) % 26 + ord('A'))
+                encrypted += "U1" + enc   # tag: uppercase, first half
+            else:  # N-Z
                 shift = shift2 ** 2
-                new_pos = (pos + shift) % 26
+                enc = chr((ord(ch) - ord('A') + shift) % 26 + ord('A'))
+                encrypted += "U2" + enc   # tag: uppercase, second half
 
-            encrypt_text += chr(new_pos + ord('A'))
-
+        # Other characters
         else:
-            encrypt_text += char
+            encrypted += "O" + ch        # tag: other
 
     with open("encrypted_text.txt", "w") as outfile:
-        outfile.write(encrypt_text)
-
+        outfile.write(encrypted)
