@@ -3,7 +3,7 @@ import math
 
 
 def indented_edge(t, length, depth):
-    """Draw one edge with an inward equilateral-triangle indentation (recursive)."""
+    """Initial case of recursion, when recursion depth = 0, draw a straight line."""
     if depth == 0:
         t.forward(length)
         return
@@ -33,7 +33,7 @@ def draw_pattern_polygon(sides, side_length, depth):
     t.hideturtle()
     t.pensize(2)
 
-    # Better centering for many cases
+    # Better centering in the screen
     radius = side_length / (2 * math.sin(math.pi / sides))
     t.penup()
     t.goto(-side_length / 2, -radius / 2)
@@ -58,3 +58,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
