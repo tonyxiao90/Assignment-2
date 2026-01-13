@@ -12,27 +12,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
-
-
-
-#     from Encryption import *
-
-# from Decryption import * #all 
-
-# def main():
-
-#     message = "hello world tony"
-
-#     shift = 5
-
-#     encrypted = encrypt(message, shift)
-
-#     print(encrypted)
-
-#     decrypted = decrypt(encrypted, shift)
-
-#     print(decrypted)
-
-# if __name__ == "__main__":
-#     main()
