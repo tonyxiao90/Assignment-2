@@ -1,38 +1,34 @@
-
 def decrypt_text(shift1, shift2):
-
-    with open ("encrypted_text.txt", "r") as infile:
+    with open("encrypted_text.txt", "r") as infile:
         text = infile.read()
 
-    decrypt_text = ""
+    decrypted = ""
+    i = 0
 
-    for char in text: 
-        if char.islower():  #Lowercase Letters
-            pos = ord(char) - ord('a')
-            if pos <= 12: # a-m 
-                shift = shift1 * shift2
-                new_pos = (pos - shift) % 26
-            else:
-                shift = shift1 + shift2
-                new_pos = (pos + shift) % 26
+    while i < len(text):
+        tag = text[i:i+2] if text[i] in "LU" else text[i]
+        i += 2 if text[i] in "LU" else 1
+        ch = text[i]
+        i += 1
 
-            decrypt_text += chr(new_pos + ord('a'))
+        if tag == "L1":
+            shift = shift1 * shift2
+            decrypted += chr((ord(ch) - ord('a') - shift) % 26 + ord('a'))
 
-        elif char.isupper():
-            pos = ord(char) - ord('A')
+        elif tag == "L2":
+            shift = shift1 + shift2
+            decrypted += chr((ord(ch) - ord('a') + shift) % 26 + ord('a'))
 
-            if pos <= 12: 
-                shift = shift1
-                new_pos = (pos + shift) % 26
-            else:
-                shift = shift2 ** 2
-                new_pos = (pos - shift) % 26
+        elif tag == "U1":
+            shift = shift1
+            decrypted += chr((ord(ch) - ord('A') + shift) % 26 + ord('A'))
 
-            decrypt_text += chr(new_pos + ord('A'))
+        elif tag == "U2":
+            shift = shift2 ** 2
+            decrypted += chr((ord(ch) - ord('A') - shift) % 26 + ord('A'))
 
-        else:
-            decrypt_text += char
-    
+        else:  # Other characters
+            decrypted += ch
+
     with open("decrypted_text.txt", "w") as outfile:
-        outfile.write(decrypt_text)
-
+        outfile.write(decrypted)
