@@ -25,7 +25,7 @@ def indented_edge(t, length, depth):
 
 def draw_pattern_polygon(sides, side_length, depth):
     screen = turtle.Screen()
-    screen.title("Recursive Inward Indentation Polygon")
+    screen.title("HIT137 Software Now Group 16 Recursive Inward Indentation Polygon")
     screen.setup(1000, 800)
 
     t = turtle.Turtle()
@@ -58,4 +58,5 @@ def main():
 
 if __name__ == "__main__":
     main()
+
 
