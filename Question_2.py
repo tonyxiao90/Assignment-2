@@ -4,7 +4,7 @@ import re
 
 # Combine all yearly CSV files into one dataframe
 
-files = glob.glob("C:/Users/tonyx/Desktop/New folder/Software Now/Assignment 2/temperatures/stations_group_*.csv")
+files = glob.glob("C:/Users/tonyx/Desktop/New folder/Software Now/Assignment-2/temperatures/stations_group_*.csv")
 
 df = pd.concat(
     (
@@ -41,7 +41,7 @@ seasonal_avg = {
     "Spring": monthly_avg[["September", "October", "November"]].mean(),
 }
 
-average_temp_output = "C:/Users/tonyx/Desktop/New folder/Software Now/Assignment 2/average_temp.txt"
+average_temp_output = "C:/Users/tonyx/Desktop/New folder/Software Now/Assignment-2/average_temp.txt"
 
 with open(average_temp_output, "w", encoding="utf-8") as f:
     for season in ["Summer", "Autumn", "Winter", "Spring"]:
@@ -75,7 +75,7 @@ station_range["Range"] = station_range["Max"] - station_range["Min"]
 max_range = station_range["Range"].max()
 top_range_stations = station_range[station_range["Range"] == max_range]
 
-range_output = "C:/Users/tonyx/Desktop/New folder/Software Now/Assignment 2/largest_temp_range_station.txt"
+range_output = "C:/Users/tonyx/Desktop/New folder/Software Now/Assignment-2/largest_temp_range_station.txt"
 
 with open(range_output, "w", encoding="utf-8") as f:
     for station, row in top_range_stations.iterrows():
@@ -101,7 +101,7 @@ max_std = station_std.max()
 most_stable = station_std[station_std == min_std]
 most_variable = station_std[station_std == max_std]
 
-stability_output = "C:/Users/tonyx/Desktop/New folder/Software Now/Assignment 2/temperature_stability_stations.txt"
+stability_output = "C:/Users/tonyx/Desktop/New folder/Software Now/Assignment-2/temperature_stability_stations.txt"
 
 with open(stability_output, "w", encoding="utf-8") as f:
     for station, std in most_stable.items():
